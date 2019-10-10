@@ -31,7 +31,49 @@ JbInterpreterTest >> testDeclarationBindsVariableToExpressionValue [
 	self assert: (interpreter environment at: 'x') equals: 19.
 	
 	self interpret: 'var x = 6;var y = 2*x;'.
-	self assert: (interpreter environment at: 'y') equals: 12
+	self assert: (interpreter environment at: 'y') equals: 12.
+	
+	self interpret: 'var x = 8 - 2;'.
+	self assert: (interpreter environment at: 'x') equals: 6.
+	
+	self interpret: 'var x = 8 / 2;'.
+	self assert: (interpreter environment at: 'x') equals: 4.
+	
+	self interpret: 'var x = 8 == 2;'.
+	self assert: (interpreter environment at: 'x') equals: false.
+	
+	self interpret: 'var x = 8 < 2;'.
+	self assert: (interpreter environment at: 'x') equals: false.
+	
+	self interpret: 'var x = 8 <= 2;'.
+	self assert: (interpreter environment at: 'x') equals: false.
+	
+	self interpret: 'var x = 8 > 2;'.
+	self assert: (interpreter environment at: 'x') equals: true.
+	
+	self interpret: 'var x = 8 >= 2;'.
+	self assert: (interpreter environment at: 'x') equals: true.
+	
+	self interpret: 'var x = 8 != 2;'.
+	self assert: (interpreter environment at: 'x') equals: true.
+	
+	self interpret: 'var x = -(-2);'.
+	self assert: (interpreter environment at: 'x') equals: 2.
+	
+	self interpret: 'var x = abs -2'.
+	self assert: (interpreter environment at: 'x') equals: 2. 
+
+	self interpret: 'var x = concat 2 2'.
+	self assert: (interpreter environment at: 'x') equals: '22'.
+	
+	self interpret: 'var x = length #(1, 2, 3)'.
+	self assert: (interpreter environment at: 'x') equals: 5.
+	
+	self interpret: 'var x = mod 6 5'.
+	self assert: (interpreter environment at: 'x') equals: 1.
+
+	self interpret: 'var x = not true'.
+	self assert: (interpreter environment at: 'x') equals: false.
 ]
 
 { #category : #running }
